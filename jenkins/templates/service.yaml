@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "helm-jenkins.fullname" . }}
+  labels:
+{{ include "helm-jenkins.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.internalPort }}
+      protocol: TCP
+      nodePort: {{ .Values.service.externalPort }}
+      name: hjenkins
+  selector:
+    app.kubernetes.io/name: {{ include "helm-jenkins.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

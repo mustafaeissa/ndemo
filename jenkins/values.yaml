@@ -1,0 +1,10 @@
+replicaCount: 1
+image:
+  repository: "jenkins/jenkins"
+  tag: "latest"
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 8080
+  internalPort: 8080
+  externalPort: 30330
